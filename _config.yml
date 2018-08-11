@@ -1,0 +1,15 @@
+title: Full of Symmetries
+description: >- 
+        This is Diego Lopez's blog, where they write about 
+        their various projects.
+baseurl: "" 
+url: "https://symmetries.github.io" 
+github_username: symmetries
+
+markdown: kramdown
+theme: minima
+
+collections:
+        projects:
+                output: true
+                permalink: /:collection/:name
