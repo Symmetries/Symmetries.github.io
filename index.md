@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-# About
+# About1
 Diego Lopez is currently an undergraduate mathematics and computer science
 student at McGill University. Their interests lie mostly at the intersection
 of mathematics and computer science.
