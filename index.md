@@ -1,7 +1,8 @@
 ---
 layout: home
-title: About5
+title: null
 ---
+<h1> About </h1>
 Diego Lopez is currently an undergraduate mathematics and computer science
 student at McGill University. Their interests lie mostly at the intersection
 of mathematics and computer science.
