@@ -1,6 +1,13 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
 ---
+# About
+Diego Lopez is currently an undergraduate mathematics and computer science
+student at McGill University. Their interests lie mostly at the intersection
+of mathematics and computer science.
+
+# Projects
+{% for item in site.projects %}
+  <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+  <p> {{ item.description }}. <a href="{{ item.demo }}">Demo.</a> </p>
+{% endfor %}

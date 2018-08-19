@@ -1,10 +1,11 @@
 title: Full of Symmetries
+author: Diego Lopez
 description: >- 
         This is Diego Lopez's blog, where they write about 
         their various projects.
 baseurl: "" 
 url: "https://symmetries.github.io" 
-github_username: symmetries
+github_username: Symmetries
 
 markdown: kramdown
 theme: minima

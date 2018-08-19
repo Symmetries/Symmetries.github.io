@@ -13,7 +13,7 @@ projecting them onto the screen using a
 The projected objects are then colored using
 [flat shading](https://en.wikipedia.org/wiki/Shading#Flat_shading).
 
-![demo image](\images\utah-teapot.png)
+![demo image](\images\utah-teapot\utah-teapot.png)
 {: img-center}
 
 A working demo can be found [here]({{ page.demo }}).
