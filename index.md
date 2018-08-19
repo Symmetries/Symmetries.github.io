@@ -1,6 +1,6 @@
 ---
 layout: home
-title: null
+title: test
 ---
 
 # About3
