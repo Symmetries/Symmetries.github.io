@@ -611,7 +611,6 @@ button {
         padding: 0;
 }
 button:hover {
-        box-shadow: 0 0.5em 0.6em 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         opacity: 1;
 }
 button:disabled {
@@ -658,6 +657,13 @@ input[type=range]::-moz-range-thumb {
 
 #### Non Overlapping Hyperballs
 
+{% highlight html %}
+
+{% include math.html %}
+<p> hello </p>
+{% endhighlight %}
+
+https://github.com/Symmetries/n-dimensional-collisions/blob/ec386234b2cd0c4ad0f6d2e55c4996568ff4ec99/index.html#L1-L27
 #### Movement
 
 ## Final Words
