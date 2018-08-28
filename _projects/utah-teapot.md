@@ -2,7 +2,8 @@
 layout: page
 title: Utah Teapot
 description: A simple software renderer written in pure JavaScript
-demo: https://symmetries.github.io/utah-teapot
+demo: https://symmetries.github.io/utah-teapot/
+source: https://github.com/Symmetries/utah-teapot/
 ---
 
 {% include img-align.md %} 
@@ -16,4 +17,5 @@ projecting them onto the screen using a
 The projected objects are then colored using
 [flat shading](https://en.wikipedia.org/wiki/Shading#Flat_shading).
 
-A working demo can be found [here]({{ page.demo }}).
+A working demo can be found [here]({{ page.demo }}) and the source code
+can be found [here]({{ page.source }}).

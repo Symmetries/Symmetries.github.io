@@ -4,6 +4,7 @@ title: N-Dimensional Collisions
 description: N-dimensional physics engine writen in JavaScript
  and rendered with p5.js
 demo: https://symmetries.github.io/n-dimensional-collisions
+source: https://github.com/Symmetries/n-dimensional-collisions
 ---
 
 {% include img-align.md %}
@@ -17,6 +18,7 @@ This project consists of a simple physics engine in an arbitrary number
 of dimensions. The engine itself is written in pure JavaScript.
 In addition, p5.js was used for rendering.
 A demo can be found [here]({{ page.demo }}).
+The source code for this project can be found [here]({{ page.source }}).
 
 ## Tutorial
 
@@ -663,7 +665,6 @@ input[type=range]::-moz-range-thumb {
 <p> hello </p>
 {% endhighlight %}
 
-https://github.com/Symmetries/n-dimensional-collisions/blob/ec386234b2cd0c4ad0f6d2e55c4996568ff4ec99/index.html#L1-L27
 #### Movement
 
 ## Final Words
