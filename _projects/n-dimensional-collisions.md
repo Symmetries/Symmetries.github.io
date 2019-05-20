@@ -391,7 +391,7 @@ In other words, we are interested in the points which satisfy those equations as
 well as the equation for the initial hyperball:
 
 \\[
-\left \\{ \vec p \in \mathbb{R}^n \middle | \\|\vec p - \vec o\\| \leq r \right \\},
+\left \\{ \vec p \in \mathbb{R}^n : d(\vec p, \vec o) \leq r \right \\},
 \\]
 
 where \\( \vec o \\) is the center of the hyperball and \\( r \\)
@@ -659,12 +659,21 @@ input[type=range]::-moz-range-thumb {
 
 #### Non Overlapping Hyperballs
 
-{% highlight html %}
-
-{% include math.html %}
-<p> hello </p>
-{% endhighlight %}
+At the start of the simulation we would like there to be no ovelapping hyperballs.
+This can be achieve quite easily using the generate and test strategy:
+randomly select a radius and position and check if there is any overlap with the reset of the 
+hyperballs. In order to speed up this process, the maximum radius can be made to exponentially decrease
+in each iteration.
 
 #### Movement
+
+For each of the hyperballs, we update them. Thankfully, we already have a static method called
+`updateAll()` in the `Hyperball` class which does this.
+
+### Drawing
+
+To draw each frame of the animation, we will either use p5.js in 2D or 3D (WEBGL) mode.
+For each hyperball, we compute it's cross section, and if it exists we draw either an ellipe or a sphere at
+it's place. We can optionally also choose to visualize in 1D by drawing segments.
 
 ## Final Words
