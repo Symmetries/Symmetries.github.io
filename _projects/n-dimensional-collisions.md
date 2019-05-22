@@ -57,6 +57,7 @@ Furthermore, the operations the operations will return
 a new `Vector` object
 rather than modifying the existing one.
 So, we can start writing our class:
+
 {% highlight javascript %}
 class Vector {
   constructor(...values) {
@@ -267,7 +268,7 @@ m_1 \left ( \\| \vec v_1^\prime \\| ^2 - \| \vec v_1 \\| ^2\right ) =
   \quad (5) 
 \\]
 
-We use the identiy
+We use the identity
 \\( \\| \vec v \\| ^2 - \\| \vec u\\| ^2 
   = (\vec v - \vec u) \cdot (\vec v + \vec u) \\)
 to rewrite (5).
@@ -320,7 +321,6 @@ Substituting (8) onto the left side of (7)
 \\]
 
 Substituting (9) onto the right side of (7)
-
 \\[
 \begin{aligned}
 &(\vec s_1 - \vec s_1) \cdot \left (
@@ -379,7 +379,7 @@ which concludes the derivation.
 Projecting higher dimensional objects into a 2D screen is far
 from a trivial problem. There are many ways to solve this, and
 this project will solve it by computing a cross section of the
-hypersballs. However, in the case of a 6 dimensional object,
+hyperballs. However, in the case of a 6 dimensional object,
 for example, a cross section of a cross section of a cross section
 must be computed in order to be displayed as an ordinary 3D ball.
 The easiest cross sections to compute are those which are perpendicular
@@ -655,6 +655,44 @@ input[type=range]::-moz-range-thumb {
 }
 {% endhighlight %} 
 
+#### Generating UI Elements
+
+The number of sliders in the project varies depending on the number of "hidden" dimensions that
+the user chooses to have.
+By hidden dimension, we mean all dimensions excecpt the ones currently shown to the user.
+For instance, if the total number of dimensions is 8, but is being projected down to 3, then there
+are 5 hidden dimensions, and hence, we need to generate 5 sliders.
+Thankfully, the code for this is simple.
+
+{% highlight javascript %}
+function createSliders() {
+  for (let i = 0; i < extraDim; i++){
+    divs.push(createDiv(""));
+    paras.push(createP("x<sub>" + (i+displayDim+1) + "</sub>:"));
+    sliders.push(createSlider(0, depth, depth/2));
+    divs[i].child(paras[i]);
+    divs[i].child(sliders[i]);
+    divs[i].parent(document.querySelector("footer"));
+  }
+}
+{% endhighlight %}
+
+Here, the `divs` and `paras` variables are arrays which hold all the elements we dynamically create.
+We also need to remove all those elements when the user changes the number of dimensions.
+
+{% highlight javascript %}
+function removeSliders() {
+  for (let i = 0; i < sliders.length; i++){
+    sliders[i].remove();
+    paras[i].remove();
+    divs[i].remove();
+  }
+  sliders = [];
+  paras = [];
+  divs = [];
+}
+{% endhighlight %}
+
 ### Animation
 
 #### Non Overlapping Hyperballs
@@ -665,6 +703,107 @@ randomly select a radius and position and check if there is any overlap with the
 hyperballs. In order to speed up this process, the maximum radius can be made to exponentially decrease
 in each iteration.
 
+We could for instance decide to always have 10 hyperballs in for each number of dimensions.
+However, we notice that they become more and more difficult to find as the number of dimensions increases.
+Intuitively, this is due to the fact that the more dimensions there are, the more space the is.
+To combat this, we choose to have \\( 2^n \\) hyperballs when the dimensions is \\( n \\).
+The initialization and reset is as follows:
+
+
+{% highlight javascript %}
+function init() {
+  previousTime = Date.now();
+  hyperballs = [];
+  dim = 4;
+  extraDim = 1;
+  displayDim = 3;
+  sliders = [];
+  paras = [];
+  divs = [];
+  backgroundColor = 50;
+  sideColor = 0;
+  backColor = 0;
+  ballColor = color(0, 200, 0);
+}
+
+function restart(){
+  dim = displayDim + extraDim
+  numBalls = 2**dim;
+  depth = Math.min(width, height);
+  hyperballs = [];
+  dimensions = [width, height];
+  for (let i = 2; i < dim; i++){
+    dimensions.push(depth);
+  }  
+  for (let i = 0; i < numBalls; i++){
+    var overlap = true;
+    var test;
+    r = Math.min(...dimensions)/2 * Math.random();
+    while (overlap){
+      r *= 0.99;
+      let v = [];
+      let p = [];
+      let a = [];
+      for (let j = 0; j < dim; j++){
+        v.push(50*Math.random());
+        p.push(r + (dimensions[j]-2*r)*Math.random());
+        a.push(0);
+      }
+      test = new Hyperball(r, new Vector(p), new Vector(v), new Vector(a), r**dim, dim);
+      overlap = false;
+      for (let j = 0; j < hyperballs.length; j++){
+        if (Hyperball.isColliding(test, hyperballs[j])) {
+          overlap = true;
+        }
+      }
+    }
+    hyperballs.push(test);
+  }
+  removeSliders();
+  createSliders();
+  updateUIValues();
+}
+{% endhighlight %}
+
+We call the second function `restart` since it will also be called when the user changes the dimension.
+Now, we have to "bind" the UI to our `restart` function.
+That is, we wish to call `restart` whenever the user changes the dimension.
+
+{% highlight javascript %}
+function buildUI() {
+  document.querySelector("#decrementDisplayDimButton").onclick = () => {
+    if (displayDim > 0) displayDim--;
+    restart();
+  };
+
+  document.querySelector("#incrementDisplayDimButton").onclick = () => {
+    if (displayDim < 3) displayDim++;
+    restart();
+  };
+
+  document.querySelector("#decrementExtraDimButton").onclick = () => {
+    if (extraDim > 0) extraDim--;
+    restart();
+  };
+  
+  document.querySelector("#incrementExtraDimButton").onclick = () => {
+    if (extraDim < 3) extraDim++;
+    restart();
+  };
+}
+{% endhighlight %}
+
+Finally, the `p5.js` `setup()` function (called once at the beginning) is:
+
+{% highlight javascript %}
+function setup(){
+  init();
+  canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
+  buildUI();
+  restart();
+}
+{% endhighlight %}
+
 #### Movement
 
 For each of the hyperballs, we update them. Thankfully, we already have a static method called
@@ -672,8 +811,94 @@ For each of the hyperballs, we update them. Thankfully, we already have a static
 
 ### Drawing
 
-To draw each frame of the animation, we will either use p5.js in 2D or 3D (WEBGL) mode.
-For each hyperball, we compute it's cross section, and if it exists we draw either an ellipe or a sphere at
-it's place. We can optionally also choose to visualize in 1D by drawing segments.
+To draw each frame of the animation, we will either use `p5.js` in 2D or 3D (`WEBGL`) mode.
+For each hyperball, we compute its cross section, and if it exists we draw either an ellipse or a sphere at
+its place.
+We can optionally also choose to visualize in 1D by drawing segments.
+
+The last piece of code is thus
+
+{% highlight javascript %}
+function draw() {
+  background(backgroundColor);
+  if (displayDim === 2 || displayDim === 1){
+    fill(ballColor);
+  } else if (displayDim === 3){
+    noStroke();
+    push();
+    fill(120);
+    translate(0, 0, -depth);
+    plane(width, height);
+    pop();
+    fill(50);
+    push();
+    translate(0, height/2, -depth/2);
+    rotateX(-PI/2);
+    plane(width, depth);
+    pop();
+    push();
+    translate(0, -height/2, -depth/2);
+    rotateX(PI/2);
+    plane(width, depth);
+    pop();
+    fill(80);
+    push();
+    translate(width/2, 0, -depth/2);
+    rotateY(-PI/2);
+    plane(depth, height);
+    pop();
+    push();
+    translate(-width/2, 0, -depth/2);
+    rotateY(PI/2);
+    plane(depth, height);
+    pop();
+    noFill();
+    stroke(ballColor);
+  }
+  
+  let dt = (Date.now()- previousTime)/1000;
+  previousTime = Date.now();
+  if (dt < 0.5){
+    dimensions = [width, height];
+    for (let i = 2; i < dim; i++){
+      dimensions.push(depth);
+    }
+    Hyperball.updateAll(hyperballs, dimensions, dt);
+    for (let i = 0; i < hyperballs.length; i++){
+      cuts = [];
+      for (let j = 0; j < dim; j++){
+        if (j >= displayDim){
+          cuts.push([j, sliders[j-displayDim].value()]);
+        }
+      }
+      let result = hyperballs[i].crossSection(cuts);
+      if (result != null){
+        if (displayDim == 0){
+          let diameter = min(width, height)/50;
+          ellipse(0, 0, diameter, diameter);
+        } else if (displayDim == 1){
+          let rectHeight = floor(min(width, height)/50);
+          rect(result.pos.get(0) - result.radius - width/2, -rectHeight/2,
+            2*result.radius, rectHeight, 
+            rectHeight, rectHeight, rectHeight, rectHeight);
+        } else if (displayDim == 2){
+          ellipse(result.pos.get(0) - width/2,
+            result.pos.get(1) - height/2,
+            2*result.radius, 2*result.radius);
+        } else if (displayDim === 3){
+          push();
+          translate(width/2-result.pos.get(0), height/2-result.pos.get(1), -result.pos.get(2));
+          strokeWeight(map(result.radius, 0, depth/2, 0, 5));
+          sphere(result.radius, 14, 10);
+          pop();
+        }
+      }
+    }
+  }
+}
+{% endhighlight %}
 
 ## Final Words
+
+And... That's about it.
+If you've followed along, you have successfully created a simple physics engine in an arbitrary number of dimensions by first creating some classes we needed, thinking through the physics of collisions and the process of taking cross sections of higher dimensions spheres into lower dimensional space.
