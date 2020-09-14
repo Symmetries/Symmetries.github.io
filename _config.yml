@@ -5,6 +5,7 @@ description: >-
 baseurl: "" 
 url: "https://symmetries.github.io" 
 github_username: Symmetries
+twitter_username: FullOfSymmetry
 
 markdown: kramdown
 theme: minima
