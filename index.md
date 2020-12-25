@@ -29,6 +29,7 @@ of mathematics and computer science.
 * [Gabriela Moisescu-Pareja](https://gabrielamp.github.io/)
 * [Maia Darmon](https://maiadd.github.io/)
 * [Marcel Goh](https://marcelgoh.github.io/)
+* [Mia Tran](https://mytran2111.github.io/)
 * [Rosie Zhao](https://rosieyzh.github.io/website/)
 * [Shereen Elaidi](https://shereenelaidi.github.io/)
 * [Stephen Fay](https://dcxst.github.io/)
