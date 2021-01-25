@@ -33,3 +33,10 @@ of mathematics and computer science.
 * [Rosie Zhao](https://rosieyzh.github.io/website/)
 * [Shereen Elaidi](https://shereenelaidi.github.io/)
 * [Stephen Fay](https://dcxst.github.io/)
+
+# Default Files
+
+* Default `.vimrc` files can be downloaded [here](files/vimrc) or alternatively can be fetched with the following command
+```
+wget -O ~/.vimrc diegolopez.me/files/vimrc
+```
