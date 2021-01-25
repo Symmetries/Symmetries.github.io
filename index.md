@@ -36,7 +36,7 @@ of mathematics and computer science.
 
 # Default Files
 
-* Default `.vimrc` files can be downloaded [here](files/vimrc) or alternatively can be fetched with the following command
+* Default `.vimrc` file can be downloaded [here](files/vimrc) or alternatively can be fetched with the following command
 ```
 wget -O ~/.vimrc diegolopez.me/files/vimrc
 ```
