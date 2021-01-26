@@ -40,3 +40,7 @@ of mathematics and computer science.
 ```
 wget -O ~/.vimrc diegolopez.me/files/vimrc
 ```
+* Default `.bashrc` file can be downloaded [here](files/bashrc) or alternatively can be fetched with the following command
+```
+wget -O ~/.bashrc diegolopez.me/files/bashrc
+```
