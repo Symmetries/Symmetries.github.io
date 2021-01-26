@@ -36,11 +36,19 @@ of mathematics and computer science.
 
 # Default Files
 
-* Default `.vimrc` file can be downloaded [here](files/vimrc) or alternatively can be fetched with the following command
+* Default `.vimrc` file can be downloaded [here](files/vimrc) or alternatively can be fetched with the command
 ```
-wget -O ~/.vimrc diegolopez.me/files/vimrc
+wget diegolopez.me/files/vimrc -O ~/.vimrc
 ```
-* Default `.bashrc` file can be downloaded [here](files/bashrc) or alternatively can be fetched with the following command
+or
 ```
-wget -O ~/.bashrc diegolopez.me/files/bashrc
+curl https://diegolopez.me/files/vimrc -o ~/.vimrc
+```
+* Default `.bashrc` file can be downloaded [here](files/bashrc) or alternatively can be fetched with the command
+```
+wget diegolopez.me/files/bashrc -O ~/.bashrc
+```
+or
+```
+curl https://diegolopez.me/files/bashrc -o ~/.bashrc
 ```
