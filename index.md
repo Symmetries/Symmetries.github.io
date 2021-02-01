@@ -26,6 +26,7 @@ of mathematics and computer science.
 # Friends
 
 * [Anna Brandenberger](https://abrandenberger.github.io/)
+* [Alex Iannantuono](https://alexander.iannantuono.org/)
 * [Gabriela Moisescu-Pareja](https://gabrielamp.github.io/)
 * [Maia Darmon](https://maiadd.github.io/)
 * [Marcel Goh](https://marcelgoh.github.io/)
