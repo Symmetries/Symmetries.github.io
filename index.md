@@ -9,16 +9,18 @@ of mathematics and computer science.
 
 # Projects
 {% for item in site.projects %}
-  <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+  <h2>{{ item.title }}</h2>
   <p>
     {{ item.description }}. 
-
+    {% if item.url %}
+      <a href="{{ item.url }}">More info</a>.
+    {% endif %}
     {% if item.demo %}
       <a href="{{ item.demo }}">Demo</a>.
     {% endif %}
 
     {% if item.source %} 
-      <a href="{{ item.source }}">Source Code </a>.
+      <a href="{{ item.source }}">Source Code</a>.
     {% endif %}
   </p>
 {% endfor %}
@@ -34,22 +36,3 @@ of mathematics and computer science.
 * [Rosie Zhao](https://rosieyzh.github.io/website/)
 * [Shereen Elaidi](https://shereenelaidi.github.io/)
 * [Stephen Fay](https://dcxst.github.io/)
-
-# Default Files
-
-* Default `.vimrc` file can be downloaded [here](files/vimrc) or alternatively can be fetched with the command
-```
-wget diegolopez.me/files/vimrc -O ~/.vimrc
-```
-or
-```
-curl https://diegolopez.me/files/vimrc -o ~/.vimrc
-```
-* Default `.bashrc` file can be downloaded [here](files/bashrc) or alternatively can be fetched with the command
-```
-wget diegolopez.me/files/bashrc -O ~/.bashrc
-```
-or
-```
-curl https://diegolopez.me/files/bashrc -o ~/.bashrc
-```
